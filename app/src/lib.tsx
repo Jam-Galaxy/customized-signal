@@ -20,7 +20,3 @@ const root = createRoot(document.getElementById(rootElementId)!)
 root.render(<App />)
 console.log("App started");
 }
-
-export function testFunction() {
-  console.log("testFunction started");
-}

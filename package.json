@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "A friendly music sequencer application for OS X and Windows.",
   "scripts": {
-    "start": "turbo run dev --parallel",
+    "start": "npm run --prefix app dev",
     "build": "npm run build:app && npm run build:static",
     "build:app": "turbo build && cpx \"app/dist/**/*\" dist",
     "build:static": "npm install --prefix static && npm run build --prefix static && cpx \"static/out/**/*\" dist",
+    "clear": "rimraf dist && rimraf app/dist",
     "serve": "npx http-server dist",
     "test": "turbo test",
     "lint": "turbo lint",
@@ -45,6 +46,6 @@
   ],
   "packageManager": "npm@11.3.0",
   "exports": {
-    "./browserMain": "./dist/customized-signal/browserMain.js"
+    ".": "./dist/customized-signal/lib.js"
   }
 }

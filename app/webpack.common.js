@@ -7,20 +7,20 @@ const Dotenv = require("dotenv-webpack")
 module.exports = {
   context: __dirname,
   entry: {
-    browserMain: { 
-      import: "./src/index.tsx",
+    lib: {
+      import: "./src/lib.tsx",
       library: {
         type: 'module',        
       },
     },
+    browserMain: { 
+      import: "./src/index.ts",
+    },
   },
   output: {
     filename: (pathData) => {
-      if (pathData.chunk.name === 'browserMain') {
-        return 'browserMain.js';
-      }
-      if (pathData.chunk.name === 'testIndex') {
-        return 'testIndex.js';
+      if (pathData.chunk.name === 'lib') {
+        return 'lib.js';
       }
       return '[name]-[chunkhash].js';
     },
@@ -52,12 +52,12 @@ module.exports = {
       path: path.join(__dirname, "../.env"),
       systemvars: true,
     }),
-    // new HtmlWebpackPlugin({
-    //   inject: true,
-    //   filename: "edit.html",
-    //   chunks: ["browserMain"],
-    //   template: path.join(__dirname, "public", "edit.html"),
-    // }),
+    new HtmlWebpackPlugin({
+      inject: true,
+      filename: "edit.html",
+      chunks: ["browserMain"],
+      template: path.join(__dirname, "public", "edit.html"),
+    }),
     new ForkTsCheckerWebpackPlugin({
       formatter: { type: "codeframe", pathType: "absolute" },
     }),
