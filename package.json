@@ -1,5 +1,5 @@
 {
-  "name": "signal",
+  "name": "customized-signal",
   "version": "0.0.1",
   "description": "A friendly music sequencer application for OS X and Windows.",
   "scripts": {
@@ -33,6 +33,7 @@
   "homepage": "https://github.com/ryohey/signal/",
   "private": true,
   "devDependencies": {
+    "audio-worklet-loader": "^1.1.0",
     "cpx": "^1.5.0",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
@@ -42,5 +43,8 @@
     "app",
     "packages/*"
   ],
-  "packageManager": "npm@11.3.0"
+  "packageManager": "npm@11.3.0",
+  "exports": {
+    "./browserMain": "./dist/customized-signal/browserMain.js"
+  }
 }

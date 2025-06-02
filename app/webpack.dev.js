@@ -3,6 +3,8 @@ const common = require("./webpack.common.js")
 const path = require("path")
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin")
 
+const PUBLIC_PATH = '';
+
 module.exports = merge(common, {
   mode: "development",
   devtool: "inline-source-map",
@@ -31,6 +33,10 @@ module.exports = merge(common, {
       ],
     },
     open: "edit",
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist' + PUBLIC_PATH),
+    publicPath: PUBLIC_PATH,
   },
   module: {
     rules: [

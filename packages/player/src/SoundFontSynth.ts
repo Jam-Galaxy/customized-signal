@@ -1,5 +1,9 @@
 import { SynthEvent, getSampleEventsFromSoundFont } from "@ryohey/wavelet"
-import { SendableEvent, SynthOutput } from "./SynthOutput.js"
+import { SendableEvent, SynthOutput } from "./SynthOutput.js";
+
+//INFO: This processor is loaded as a resource. See webpack.common.js for details.
+//@ts-ignore
+import audioWorkletProcessor from "@ryohey/wavelet/dist/processor.js";
 
 export class SoundFontSynth implements SynthOutput {
   private synth: AudioWorkletNode | null = null
@@ -18,8 +22,7 @@ export class SoundFontSynth implements SynthOutput {
   constructor(private readonly context: AudioContext) {}
 
   async setup() {
-    const url = new URL("@ryohey/wavelet/dist/processor.js", import.meta.url)
-    await this.context.audioWorklet.addModule(url)
+    await this.context.audioWorklet.addModule(audioWorkletProcessor);
   }
 
   async loadSoundFontFromURL(url: string) {
