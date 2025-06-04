@@ -27,7 +27,7 @@ export default class RootStore {
 
   constructor() {
     const context = new (window.AudioContext || window.webkitAudioContext)()
-    this.synth = new SoundFontSynth(context)
+    this.synth = new SoundFontSynth(context, {} as any); //TODO: pass toneAudioContext here
     const eventSource = new EventSource(this.songStore)
     this.player = new Player(this.synth, eventSource)
   }

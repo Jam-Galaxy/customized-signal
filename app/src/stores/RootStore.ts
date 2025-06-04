@@ -35,10 +35,14 @@ export default class RootStore {
   readonly midiMonitor: MIDIMonitor
   readonly soundFontStore: SoundFontStore
 
-  constructor() {
-    const context = new (window.AudioContext || window.webkitAudioContext)()
-    this.synth = new SoundFontSynth(context)
-    this.metronomeSynth = new SoundFontSynth(context)
+  constructor(toneAudioContext?: any, audioContext?: AudioContext) {
+    if(!audioContext) {
+      console.warn("audioContext was not passed! Creating new AudioContext instance");
+      audioContext = new (window.AudioContext || window.webkitAudioContext)() 
+    }
+    const context = audioContext;
+    this.synth = new SoundFontSynth(context, toneAudioContext);
+    this.metronomeSynth = new SoundFontSynth(context, toneAudioContext);
     this.synthGroup = new GroupOutput(this.metronomeSynth)
     this.synthGroup.outputs.push({ synth: this.synth, isEnabled: true })
 

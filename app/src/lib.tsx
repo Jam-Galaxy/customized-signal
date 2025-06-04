@@ -3,7 +3,7 @@ import { configure } from "mobx"
 import { createRoot } from "react-dom/client"
 import { App } from "./components/App/App"
 
-export function start(rootElementId: string) {
+export function start(rootElementId: string, toneAudioContext?: any, audioContext?: AudioContext) {
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
@@ -17,6 +17,6 @@ configure({
 })
 
 const root = createRoot(document.getElementById(rootElementId)!)
-root.render(<App />)
+root.render(<App toneAudioContext={toneAudioContext} audioContext={audioContext} />)
 console.log("App started");
 }

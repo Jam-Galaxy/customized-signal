@@ -32,9 +32,8 @@ import { Toast } from "../ui/Toast"
 import { ElectronCallbackHandler } from "./ElectronCallbackHandler"
 import { LocalizationProvider } from "./LocalizationProvider"
 
-const rootStore = new RootStore()
-
-export function App() {
+export function App({toneAudioContext, audioContext}: {toneAudioContext?: any, audioContext?: AudioContext}) {
+  const rootStore = new RootStore(toneAudioContext, audioContext)
   return (
     <React.StrictMode>
       <StoreContext.Provider value={rootStore}>

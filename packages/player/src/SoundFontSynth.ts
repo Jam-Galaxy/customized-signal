@@ -4,6 +4,7 @@ import { SendableEvent, SynthOutput } from "./SynthOutput.js";
 //INFO: This processor is loaded as a resource. See webpack.common.js for details.
 //@ts-ignore
 import audioWorkletProcessor from "@ryohey/wavelet/dist/processor.js";
+import { createWorkletNode } from "./utils/utils.js";
 
 export class SoundFontSynth implements SynthOutput {
   private synth: AudioWorkletNode | null = null
@@ -19,10 +20,10 @@ export class SoundFontSynth implements SynthOutput {
 
   private sequenceNumber = 0
 
-  constructor(private readonly context: AudioContext) {}
+  constructor(private readonly context: AudioContext, private readonly toneAudioContext: any) {}
 
   async setup() {
-    await this.context.audioWorklet.addModule(audioWorkletProcessor);
+    // await this.context.audioWorklet.addModule(audioWorkletProcessor);
   }
 
   async loadSoundFontFromURL(url: string) {
@@ -37,10 +38,19 @@ export class SoundFontSynth implements SynthOutput {
     }
 
     // create new node
-    this.synth = new AudioWorkletNode(this.context, "synth-processor", {
+    // this.synth = new AudioWorkletNode(this.context, "synth-processor", {
+    //   numberOfInputs: 0,
+    //   outputChannelCount: [2],
+    // } as any)
+    const options = {
       numberOfInputs: 0,
       outputChannelCount: [2],
-    } as any)
+    }
+    console.log("point1");
+    this.synth = await createWorkletNode(this.toneAudioContext, "synth-processor", audioWorkletProcessor, options) as AudioWorkletNode;
+    console.log("point2");
+
+
     this.synth.connect(this.context.destination)
     this.sequenceNumber = 0
 
