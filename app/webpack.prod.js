@@ -9,11 +9,8 @@ module.exports = merge(common, {
   mode: "production",
   optimization: {
     concatenateModules: false,
-    // splitChunks: {
-    //   chunks: "all",
-    // },
     splitChunks: false,
-    minimize: false,
+    minimize: true,
   },
   output: {
     path: path.resolve(__dirname, 'dist' + PUBLIC_PATH),
