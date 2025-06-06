@@ -1,0 +1,8 @@
+{
+  "name": "customized-signal",
+  "version": "0.0.1",
+  "description": "A friendly music sequencer application for OS X and Windows.",
+  "exports": {
+    ".": "./build/customized-signal/lib.js"
+  }
+}

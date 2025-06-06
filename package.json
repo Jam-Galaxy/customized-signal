@@ -4,9 +4,10 @@
   "description": "A friendly music sequencer application for OS X and Windows.",
   "scripts": {
     "start": "npm run --prefix app dev",
-    "build": "npm run build:app && npm run build:static",
-    "build:app": "turbo build && cpx \"app/dist/**/*\" dist",
-    "build:static": "npm install --prefix static && npm run build --prefix static && cpx \"static/out/**/*\" dist",
+    "build": "npm run build:app && npm run build:static && npm run build:create-dist",
+    "build:app": "turbo build && cpx \"app/dist/**/*\" build",
+    "build:static": "npm install --prefix static && npm run build --prefix static && cpx \"static/out/**/*\" build",
+    "build:create-dist": "cpx \"build/**/*\" \"dist/build\" && node \"scripts/create-dist.mjs\"",
     "clear": "rimraf dist && rimraf app/dist",
     "serve": "npx http-server dist",
     "test": "turbo test",
@@ -46,6 +47,6 @@
   ],
   "packageManager": "npm@11.3.0",
   "exports": {
-    ".": "./dist/customized-signal/lib.js"
+    ".": "./build/customized-signal/lib.js"
   }
 }
