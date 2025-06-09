@@ -49,6 +49,7 @@ const devConfig = ({context, browserMainImport} = {}) => {
             use: {
               loader: "babel-loader",
               options: {
+                configFile: path.resolve(currentContext, "babel.config.js"),
                 plugins: [require.resolve("react-refresh/babel")],
               },
             },
