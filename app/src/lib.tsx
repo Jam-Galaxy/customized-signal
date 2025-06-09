@@ -3,6 +3,7 @@ import { configure } from "mobx"
 import { createRoot } from "react-dom/client"
 import { App } from "./components/App/App"
 
+console.log("lib: test");
 export function start(rootElementId: string, toneAudioContext?: any, audioContext?: AudioContext) {
 
 Sentry.init({

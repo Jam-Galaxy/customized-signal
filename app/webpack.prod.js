@@ -7,6 +7,14 @@ const PUBLIC_PATH = '/customized-signal/';
 
 module.exports = merge(common(), {
   mode: "production",
+  entry: {
+    lib: {
+      import: "./src/lib.tsx",
+      library: {
+      type: 'module',        
+      },
+    },
+  },
   optimization: {
     concatenateModules: false,
     splitChunks: false,
@@ -35,4 +43,7 @@ module.exports = merge(common(), {
       ],
     }),
   ],
+  experiments: {
+    outputModule: true,
+  },
 })

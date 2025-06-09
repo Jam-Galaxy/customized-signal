@@ -8,12 +8,6 @@ module.exports = ({context, browserMainImport} = {}) => {
   return {
     context: currentContext,
     entry: {
-      lib: {
-        import: "./src/lib.tsx",
-        library: {
-          type: 'module',        
-        },
-      },
       browserMain: { 
         import: browserMainImport ? browserMainImport : "./src/index.ts",
       },
@@ -63,8 +57,5 @@ module.exports = ({context, browserMainImport} = {}) => {
         formatter: { type: "codeframe", pathType: "absolute" },
       }),
     ],
-    experiments: {
-        outputModule: true,
-    },
   }
 }
