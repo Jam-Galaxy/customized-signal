@@ -5,67 +5,73 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 
 const PUBLIC_PATH = '';
 
-module.exports = merge(common, {
-  mode: "development",
-  devtool: "inline-source-map",
-  devServer: {
-    port: 3000,
-    hot: "only",
-    static: {
-      directory: path.resolve(__dirname, "public"),
-      watch: true,
-    },
-    client: {
-      overlay: {
-        warnings: false,
-        errors: true,
-      },
-    },
-    historyApiFallback: {
-      rewrites: [
-        { from: /^\/edit$/, to: "/edit.html" },
-        { from: /^\/auth$/, to: "/auth.html" },
-        { from: /^\/home$/, to: "/community.html" },
-        { from: /^\/profile$/, to: "/community.html" },
-        { from: /^\/users\/.*$/, to: "/community.html" },
-        { from: /^\/songs\/.*$/, to: "/community.html" },
-        { from: /^\//, to: "/index.html" },
-      ],
-    },
-    open: "edit",
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist' + PUBLIC_PATH),
-    publicPath: PUBLIC_PATH,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(j|t)sx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            plugins: [require.resolve("react-refresh/babel")],
+const devConfig = ({context, browserMainImport} = {}) => {
+  const currentContext = context? context: __dirname;
+  return {
+    context: currentContext,
+      mode: "development",
+      devtool: "inline-source-map",
+      devServer: {
+        port: 3000,
+        hot: "only",
+        static: {
+          directory: path.resolve(currentContext, "public"),
+          watch: true,
+        },
+        client: {
+          overlay: {
+            warnings: false,
+            errors: true,
           },
         },
+        historyApiFallback: {
+          rewrites: [
+            { from: /^\/edit$/, to: "/edit.html" },
+            { from: /^\/auth$/, to: "/auth.html" },
+            { from: /^\/home$/, to: "/community.html" },
+            { from: /^\/profile$/, to: "/community.html" },
+            { from: /^\/users\/.*$/, to: "/community.html" },
+            { from: /^\/songs\/.*$/, to: "/community.html" },
+            { from: /^\//, to: "/index.html" },
+          ],
+        },
+        open: "edit",
       },
-      {
-        test: /\.js$/,
-        enforce: "pre",
-        use: ["source-map-loader"],
+      output: {
+        path: path.resolve(currentContext, 'dist' + PUBLIC_PATH),
+        publicPath: PUBLIC_PATH,
       },
-    ],
-  },
-  plugins: [
-    new ReactRefreshWebpackPlugin({
-      exclude: [/node_modules/],
-    }),
-  ],
-  resolve: {
-    alias: {
-      // Prevent to load local package's react https://github.com/facebook/react/issues/13991#issuecomment-435587809
-      react: path.resolve("../node_modules/react"),
-    },
-  },
-})
+      module: {
+        rules: [
+          {
+            test: /\.(j|t)sx?$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "babel-loader",
+              options: {
+                plugins: [require.resolve("react-refresh/babel")],
+              },
+            },
+          },
+          {
+            test: /\.js$/,
+            enforce: "pre",
+            use: ["source-map-loader"],
+          },
+        ],
+      },
+      plugins: [
+        new ReactRefreshWebpackPlugin({
+          exclude: [/node_modules/],
+        }),
+      ],
+      resolve: {
+        alias: {
+          // Prevent to load local package's react https://github.com/facebook/react/issues/13991#issuecomment-435587809
+          react: path.resolve(currentContext, "../node_modules/react"),
+        },
+      },
+  }
+}
+
+module.exports = ({context, browserMainImport} = {}) => merge(common({context, browserMainImport}), devConfig({context, browserMainImport}));

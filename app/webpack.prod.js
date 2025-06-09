@@ -5,7 +5,7 @@ const CopyPlugin = require("copy-webpack-plugin")
 
 const PUBLIC_PATH = '/customized-signal/';
 
-module.exports = merge(common, {
+module.exports = merge(common(), {
   mode: "production",
   optimization: {
     concatenateModules: false,

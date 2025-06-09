@@ -1,0 +1,12 @@
+{
+  "name": "customized-signal-example",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "start": "webpack serve --config webpack.dev.js"
+  },
+  "dependencies": {
+    "customized-signal": "file:../../",
+    "customized-tone": "file:../../../customized-tone"
+  }
+}

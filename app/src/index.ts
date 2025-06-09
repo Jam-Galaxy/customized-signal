@@ -1,2 +1,4 @@
 import { start } from "./lib";
-start("root");
+const toneAudioContext = undefined;
+const audioContext = undefined;
+start("root", toneAudioContext, audioContext);
