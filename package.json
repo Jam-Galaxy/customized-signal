@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A friendly music sequencer application for OS X and Windows.",
   "scripts": {
-    "start": "npm run --prefix app dev",
+    "start": "npm run start --prefix app/example",
     "build": "npm run build:app && npm run build:static && npm run build:create-dist",
     "build:app": "turbo build && cpx \"app/dist/**/*\" build",
     "build:static": "npm install --prefix static && npm run build --prefix static && cpx \"static/out/**/*\" build",
