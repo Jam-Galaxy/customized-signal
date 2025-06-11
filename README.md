@@ -1,10 +1,10 @@
-![logo-github](https://github.com/ryohey/signal/assets/5355966/46834ee4-30d8-4b66-a47c-6e081cc2c09f)
+This is modified version of [signal](https://signal.vercel.app).
 
-The original repository is here: [signal](https://signal.vercel.app)
+Some differencies:
+- The original project was a react app that was adapted to run in electron. In this project, it should be used as part of an audio editor for creating and editing midi tracks. Therefore, it was decided to wrap the react app in a function that receives the id of the element for mounting the react app and the audio context. The part of the build that is responsible for running inside electron was not adapted and was not tested.
+- The standard audio context has been replaced with the audio context from the Tone.js library. The audio context from Tone.js is a wrapper over the standard context. It allows you to get the underlying context using Tone.getContext().rawContext, but this underlying context is still different from the standard one. Because of this, you can only register audio worklets using the wrapper in a special way. This problem is solved in this Tone.js modification project.
 
-<img width="1024" alt="image" src="https://github.com/user-attachments/assets/0c64ff3d-b095-4359-ab77-9355e04a8bee" />
-
-### Install
+### Setup
 
 1. In the project root directory, run the following command to install the required dependencies:
    ```sh
@@ -16,43 +16,32 @@ The original repository is here: [signal](https://signal.vercel.app)
 > The first time you run it, you will get a build error, so please run `npm run build` once before running `npm start`.
 
 1. To start the application, run:
-   ```sh
+   ```
    npm start
    ```
 2. The application should now be running on [http://localhost:3000/edit](http://localhost:3000/edit).
 
 ### Build for library
-Run
-```
-npm run build
-```
+Run ```npm run build```
 
-Place the consumer application in a nearby folder
+After assembly, two folders are formed: ```dist``` and ```build```
+The ```build``` folder is required for local development (see scenario 1 in the studio project). In this case, this is where the entry point is located.
+The ```dist``` folder is a separate package that is ready to be published in Github Npm Packeges Registry and can replace the original project. It contains a lightweight package.json file and the build results.
 
-/consumer-root-folder
-|-- customized-signal
-|-- consumer-app
+It is planned that when pushing to the main branch of this repository, CI will execute the ```npm run build``` command and publish the updated package to the Github Npm Packages Registry. After that, this package can be updated inside the studio using npm.
 
-in consumer-app package.json file add dependency
-```
-"customized-signal": "file:../customized-signal",
-```
-
-In consumer-app import function `start` this way:
+In consumer package import function `start` this way:
 ```
 import { start } from "customized-signal";
 ```
 
-Pass in this function react-root element id
+Pass in this function react-root element id, toneAudioContext and audioContext
 
-```
-start("react-root");
-```
 The application should start and mount to this element
 
-in webpack configuration of consumer app add:
+in webpack configuration of consumer package add:
 
-```
+```js
 configureWebpack: {
   plugins: [
     new CopyPlugin({
