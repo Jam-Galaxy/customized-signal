@@ -11,15 +11,23 @@ Some differencies:
    npm install
    ```
 
-### Run alone
-> [!NOTE]
-> The first time you run it, you will get a build error, so please run `npm run build` once before running `npm start`.
-
-1. To start the application, run:
-   ```
-   npm start
-   ```
-2. The application should now be running on [http://localhost:3000/edit](http://localhost:3000/edit).
+### Run alone with HMR
+Since the application has been rewritten to work with the Tone.js audio context, you will need Tone.js even for isolated launch. (However, Tone.js is not required to build the customized-signal library)
+1. Setup Tone.js dependency
+  - Place the Tone.js library in a nearby folder. Build it.
+  For example:
+  ```
+  signal-with-tone/
+  ├── customized-signal
+  └── customized-tone
+  ```
+  **OR**
+  - Go to ```\app\example``` and change value of ```customized-tone``` dependency to remove URL.
+2. Go to ```\app\example```
+3. Run ```npm install```
+4. Go back to ```customized-signal``` folder
+5. Run ```npm start```
+6. The application should now be running on [http://localhost:3000/edit](http://localhost:3000/edit).
 
 ### Build for library
 Run ```npm run build```
