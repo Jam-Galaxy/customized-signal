@@ -37,20 +37,11 @@ export class SoundFontSynth implements SynthOutput {
       this.synth.disconnect()
     }
 
-    // create new node
-    // this.synth = new AudioWorkletNode(this.context, "synth-processor", {
-    //   numberOfInputs: 0,
-    //   outputChannelCount: [2],
-    // } as any)
     const options = {
       numberOfInputs: 0,
       outputChannelCount: [2],
     }
-    console.log("point1");
     this.synth = await createWorkletNode(this.toneAudioContext, "synth-processor", audioWorkletProcessor, options) as AudioWorkletNode;
-    console.log("point2");
-
-
     this.synth.connect(this.context.destination)
     this.sequenceNumber = 0
 

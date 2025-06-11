@@ -3,21 +3,18 @@ import { configure } from "mobx"
 import { createRoot } from "react-dom/client"
 import { App } from "./components/App/App"
 
-console.log("lib: test");
 export function start(rootElementId: string, toneAudioContext?: any, audioContext?: AudioContext) {
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+    environment: process.env.VERCEL_ENV,
+    integrations: [Sentry.browserTracingIntegration()],
+    tracesSampleRate: 1.0,
+  })
 
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  environment: process.env.VERCEL_ENV,
-  integrations: [Sentry.browserTracingIntegration()],
-  tracesSampleRate: 1.0,
-})
+  configure({
+    enforceActions: "never",
+  })
 
-configure({
-  enforceActions: "never",
-})
-
-const root = createRoot(document.getElementById(rootElementId)!)
-root.render(<App toneAudioContext={toneAudioContext} audioContext={audioContext} />)
-console.log("App started");
+  const root = createRoot(document.getElementById(rootElementId)!)
+  root.render(<App toneAudioContext={toneAudioContext} audioContext={audioContext} />)
 }

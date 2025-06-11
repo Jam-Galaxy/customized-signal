@@ -12,4 +12,3 @@ const merged = merge(appWebpackDevConfig({context: path.resolve(__dirname, "../"
   },
 })
 module.exports = merged;
-console.log("merged=", merged);
