@@ -1,6 +1,9 @@
 {
-  "name": "customized-signal",
+  "name": "@jam-galaxy/customized-signal",
   "version": "0.0.1",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
   "description": "A friendly music sequencer application for OS X and Windows.",
   "scripts": {
     "start": "npm run start --prefix app/example",
@@ -29,11 +32,6 @@
   },
   "author": "ryohey",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ryohey/signal/issues"
-  },
-  "homepage": "https://github.com/ryohey/signal/",
-  "private": true,
   "devDependencies": {
     "audio-worklet-loader": "^1.1.0",
     "cpx": "^1.5.0",
