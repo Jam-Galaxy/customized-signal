@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
-          scope: '@jam-galaxy' 
+          scope: '@jam-galaxy/customized-signal' 
       - run: npm install
       - run: npm run build
         env:
