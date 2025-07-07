@@ -32,10 +32,14 @@ import { Toast } from "../ui/Toast"
 import { ElectronCallbackHandler } from "./ElectronCallbackHandler"
 import { LocalizationProvider } from "./LocalizationProvider"
 
-export function App({toneAudioContext, audioContext}: {toneAudioContext?: any, audioContext?: AudioContext}) {
+import { EventEmitterProvider } from "../../studioConnector/useEventEmitter"
+
+export function App({toneAudioContext, audioContext, eventEmitter}: {toneAudioContext: any, audioContext: AudioContext, eventEmitter: any}) {
+  console.log(eventEmitter);
   const rootStore = new RootStore(toneAudioContext, audioContext)
   return (
     <React.StrictMode>
+      <EventEmitterProvider value={eventEmitter}>
       <StoreContext.Provider value={rootStore}>
         <SettingProvider>
           <ThemeProvider>
@@ -82,6 +86,7 @@ export function App({toneAudioContext, audioContext}: {toneAudioContext?: any, a
           </ThemeProvider>
         </SettingProvider>
       </StoreContext.Provider>
+      </EventEmitterProvider>
     </React.StrictMode>
   )
 }
