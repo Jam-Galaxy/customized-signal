@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@jam-galaxy/customized-signal": "file:..",
     "@kuma-ui/core": "^1.5.9",
     "@next/third-parties": "^15.3.1",
     "customized-signal": "file:..",
