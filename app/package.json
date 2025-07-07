@@ -1,6 +1,5 @@
 {
   "name": "signal",
-  "version": "0.0.1",
   "description": "A friendly music sequencer application for OS X and Windows.",
   "scripts": {
     "dev": "webpack serve --config webpack.dev.js",

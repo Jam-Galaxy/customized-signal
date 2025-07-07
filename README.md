@@ -38,6 +38,12 @@ The ```dist``` folder is a separate package that is ready to be published in Git
 
 It is planned that when pushing to the main branch of this repository, CI will execute the ```npm run build``` command and publish the updated package to the Github Npm Packages Registry. After that, this package can be updated inside the studio using npm.
 
+### Publishing
+![publishing](docs/publishing.jpg)
+- Manually increment the version inside package.json in the root of the project (trying to publish an existing version will result in an error, resulting in the package not being published).
+- Call Github Actions to publish the package manually as shown in the screenshot.
+
+### Usage
 In consumer package import function `start` this way:
 ```
 import { start } from "customized-signal";
