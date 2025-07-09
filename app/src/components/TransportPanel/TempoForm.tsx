@@ -3,6 +3,7 @@ import { DEFAULT_TEMPO } from "@signal-app/player"
 import { FC } from "react"
 import { useConductorTrack } from "../../hooks/useConductorTrack"
 import { usePlayer } from "../../hooks/usePlayer"
+import { useEventEmitter } from "../../studioConnector/useEventEmitter"
 import { NumberInput } from "../inputs/NumberInput"
 
 const TempoInput = styled(NumberInput)`
@@ -45,12 +46,15 @@ const TempoWrapper = styled.div`
 
 export const TempoForm: FC = () => {
   const { position, setCurrentTempo } = usePlayer()
-  const { currentTempo, setTempo } = useConductorTrack()
+  const { currentTempo, setTempo } = useConductorTrack();
+  const studioEventEmitter = useEventEmitter();
+
   const tempo = currentTempo ?? DEFAULT_TEMPO
 
   const changeTempo = (tempo: number) => {
     setTempo(tempo, position)
-    setCurrentTempo(tempo)
+    setCurrentTempo(tempo);
+    studioEventEmitter['emit']('signal-tempo-changed', {tempo});
   }
 
   return (

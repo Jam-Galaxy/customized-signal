@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-class EventEmitter {}
+import { EventEmitter } from "./EventEmitter";
 
 const EventEmitterContext = createContext<EventEmitter>(null!);
 export function EventEmitterProvider({ children, value}: { children: React.ReactNode; value: EventEmitter}) {

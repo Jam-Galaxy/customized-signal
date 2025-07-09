@@ -2,9 +2,9 @@ import * as Sentry from "@sentry/browser"
 import { configure } from "mobx"
 import { createRoot } from "react-dom/client"
 import { App } from "./components/App/App"
-import { ConnectorEventEmitter, createSignalApi, SignalApi } from "./studioConnector/SignalApi"
+import { ConnectorEventEmitter } from "./studioConnector/SignalApi"
 
-export function start(rootElementId: string, toneAudioContext: any, audioContext: AudioContext, eventEmitter: ConnectorEventEmitter): SignalApi {
+export function start(rootElementId: string, toneAudioContext: any, audioContext: AudioContext, eventEmitter: ConnectorEventEmitter) {
   console.log("eventEmitter=", eventEmitter);
   
   Sentry.init({
@@ -20,7 +20,4 @@ export function start(rootElementId: string, toneAudioContext: any, audioContext
 
   const root = createRoot(document.getElementById(rootElementId)!);
   root.render(<App toneAudioContext={toneAudioContext} audioContext={audioContext} eventEmitter={eventEmitter} />);
-
-  const signalApi = createSignalApi();
-  return signalApi;
 }

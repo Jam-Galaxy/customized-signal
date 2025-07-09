@@ -32,6 +32,8 @@ import { Toast } from "../ui/Toast"
 import { ElectronCallbackHandler } from "./ElectronCallbackHandler"
 import { LocalizationProvider } from "./LocalizationProvider"
 
+
+import { StudioConnector } from "../../studioConnector/StudioConnector"
 import { EventEmitterProvider } from "../../studioConnector/useEventEmitter"
 
 export function App({toneAudioContext, audioContext, eventEmitter}: {toneAudioContext: any, audioContext: AudioContext, eventEmitter: any}) {
@@ -65,6 +67,7 @@ export function App({toneAudioContext, audioContext, eventEmitter}: {toneAudioCo
                                               {isRunningInElectron() && (
                                                 <ElectronCallbackHandler />
                                               )}
+                                              <StudioConnector />
                                               <RootView />
                                             </HistoryProvider>
                                           </TrackMuteProvider>
