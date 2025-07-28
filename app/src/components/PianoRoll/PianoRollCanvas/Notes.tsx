@@ -21,9 +21,11 @@ const _Notes: FC<{ zIndex: number }> = ({ zIndex }) => {
   const { borderColor, inactiveColor, activeColor, selectedColor } =
     useNoteColor()
 
+  // console.log("Notes: notes=", notes);
+
   return (
     <>
-      {isRhythmTrack && (
+      {isRhythmTrack && ( 
         <NoteCircles
           strokeColor={borderColor}
           rects={notes}

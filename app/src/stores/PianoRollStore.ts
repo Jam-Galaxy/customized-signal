@@ -193,6 +193,8 @@ export default class PianoRollStore {
   }
 
   get allNoteBounds(): { bounds: Rect; note: NoteEvent }[] {
+    // console.log("PianoRollStore: this=", this);
+
     const { transform, selectedTrack: track } = this
     if (track === undefined) {
       return []

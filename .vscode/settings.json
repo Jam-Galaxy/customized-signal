@@ -11,7 +11,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
+    "source.organizeImports": "never"
   },
   "testing.openTesting": "neverOpen",
   "testing.automaticallyOpenTestResults": "neverOpen",

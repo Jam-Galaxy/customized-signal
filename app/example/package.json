@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "customized-signal": "file:../src/lib.ts",
-    "customized-tone": "file:../../../customized-tone"
+    "customized-tone": "file:../../../customized-tone",
+    "wavesurfer.js": "^7.9.9"
   }
 }

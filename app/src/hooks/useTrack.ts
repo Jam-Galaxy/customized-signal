@@ -4,8 +4,10 @@ import { TrackColor } from "../track/TrackColor"
 import { TrackEvent } from "../track/TrackEvent"
 import { useMobxSelector } from "./useMobxSelector"
 import { useSong } from "./useSong"
+import { useEventEmitter } from "../studioConnector/useEventEmitter"
 
 export function useTrack(id: TrackId) {
+
   const song = useSong()
   const track = useMobxSelector(() => song.getTrack(id), [song, id])
 
@@ -77,13 +79,16 @@ export function useTrack(id: TrackId) {
 }
 
 export function useTrackEvents(track: Track | undefined) {
+  const connectorEventEmitter = useEventEmitter();
   return {
     addEvent: useCallback(
       <T extends TrackEvent>(
         event: Omit<T, "id"> & { subtype?: string },
       ): T | undefined => {
         if (track) {
-          return track.addEvent(event)
+          const resultEvent = track.addEvent(event);
+          connectorEventEmitter['emit']("signal-track-addEvent-finished", {event: resultEvent});
+          return resultEvent;
         }
         return undefined
       },
@@ -92,7 +97,9 @@ export function useTrackEvents(track: Track | undefined) {
     addEvents: useCallback(
       <T extends TrackEvent>(events: Omit<T, "id">[]) => {
         if (track) {
-          return track.addEvents(events)
+          const resultEvents = track.addEvents(events)
+          connectorEventEmitter['emit']("signal-track-addEvents-finished", {events: resultEvents});                              
+          return resultEvents;
         }
       },
       [track],
@@ -100,7 +107,9 @@ export function useTrackEvents(track: Track | undefined) {
     removeEvent: useCallback(
       (eventId: number) => {
         if (track) {
-          track.removeEvent(eventId)
+          const event = track.removeEvent(eventId);
+          connectorEventEmitter['emit']("signal-track-removeEvent-finished", {event});                    
+          return event;
         }
       },
       [track],
@@ -108,7 +117,9 @@ export function useTrackEvents(track: Track | undefined) {
     removeEvents: useCallback(
       (eventIds: number[]) => {
         if (track) {
-          track.removeEvents(eventIds)
+          const events = track.removeEvents(eventIds);
+          connectorEventEmitter['emit']("signal-track-removeEvents-finished", {events});          
+          return events;
         }
       },
       [track],
@@ -116,7 +127,9 @@ export function useTrackEvents(track: Track | undefined) {
     removeRedundantEvents: useCallback(
       (event: TrackEvent) => {
         if (track) {
-          track.removeRedundantEvents(event)
+          const events = track.removeRedundantEvents(event);
+          connectorEventEmitter['emit']("signal-track-removeRedundantEvents-finished", {events});
+          return events;
         }
       },
       [track],
@@ -126,7 +139,9 @@ export function useTrackEvents(track: Track | undefined) {
         newEvent: Omit<T, "id"> & { subtype?: string; controllerType?: number },
       ) => {
         if (track) {
-          return track.createOrUpdate(newEvent)
+          const event = track.createOrUpdate(newEvent);
+          connectorEventEmitter['emit']("signal-track-createOrUpdate-finished", {event});
+          return event;
         }
       },
       [track],
@@ -134,7 +149,9 @@ export function useTrackEvents(track: Track | undefined) {
     updateEvent: useCallback(
       <T extends TrackEvent>(id: number, obj: Partial<T>): T | null => {
         if (track) {
-          return track.updateEvent(id, obj)
+          const event = track.updateEvent(id, obj);
+          connectorEventEmitter['emit']("signal-track-updateEvent-finished", {event});
+          return event;
         }
         return null
       },
@@ -143,7 +160,9 @@ export function useTrackEvents(track: Track | undefined) {
     updateEvents: useCallback(
       (events: Partial<TrackEvent>[]) => {
         if (track) {
-          track.updateEvents(events)
+          const resultEvents = track.updateEvents(events);
+          connectorEventEmitter['emit']("signal-track-updateEvents-finished", {events: resultEvents});
+          return resultEvents;
         }
       },
       [track],

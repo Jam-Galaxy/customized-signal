@@ -69,6 +69,7 @@ export const PianoRollCanvas: FC<PianoRollStageProps> = ({ width, height }) => {
     [scrollLeft, scrollTop],
   )
 
+  // console.log("scrollXMatrix=", scrollXMatrix, "scrollYMatrix=", scrollYMatrix, "scrollXYMatrix=", scrollXYMatrix);
   return (
     <>
       <GLCanvas
