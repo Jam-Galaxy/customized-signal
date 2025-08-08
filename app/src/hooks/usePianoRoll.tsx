@@ -389,10 +389,17 @@ export function usePianoRoll() {
       [pianoRollStore],
     ),
     getSelection: useCallback(() => pianoRollStore.selection, [pianoRollStore]),
+    
+    
     getSelectedTrack: useCallback(
       () => pianoRollStore.selectedTrack,
       [pianoRollStore],
     ),
+    getSelectedTrackWithHook: useCallback(()=> {
+
+    }, []),
+
+
     getSelectedNoteIds: useCallback(
       () => pianoRollStore.selectedNoteIds,
       [pianoRollStore],

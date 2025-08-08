@@ -81,7 +81,8 @@ export function useTrack(id: TrackId) {
 export function useTrackEvents(track: Track | undefined) {
   const connectorEventEmitter = useEventEmitter();
   return {
-    addEvent: useCallback(
+    // addEvent: useCallback(
+    addEvent:
       <T extends TrackEvent>(
         event: Omit<T, "id"> & { subtype?: string },
       ): T | undefined => {
@@ -92,8 +93,8 @@ export function useTrackEvents(track: Track | undefined) {
         }
         return undefined
       },
-      [track],
-    ),
+      // [track],
+    // ),
     addEvents: useCallback(
       <T extends TrackEvent>(events: Omit<T, "id">[]) => {
         if (track) {

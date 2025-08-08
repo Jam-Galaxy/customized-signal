@@ -1,7 +1,7 @@
 import { useTheme } from "@emotion/react"
 import Color from "color"
 import React, { FC, useCallback, useState } from "react"
-import { Layout } from "../../Constants"
+import { Layout } from "../../config"
 import { Point } from "../../entities/geometry/Point"
 import { KeySignature } from "../../entities/scale/KeySignature"
 import { noteNameWithOctString } from "../../helpers/noteNumberString"

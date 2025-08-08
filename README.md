@@ -22,8 +22,8 @@ Since the application has been rewritten to work with the Tone.js audio context,
   └── customized-tone
   ```
   **OR**
-  - Go to ```\app\example``` and change value of ```customized-tone``` dependency to remove URL.
-2. Go to ```\app\example```
+  - Go to ```\app\localLauncher``` and change value of ```customized-tone``` dependency to remove URL.
+2. Go to ```\app\localLauncher```
 3. Run ```npm install```
 4. Go back to ```customized-signal``` folder
 5. Run ```npm start```

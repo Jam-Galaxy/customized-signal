@@ -1,6 +1,6 @@
 import { max, min } from "lodash"
 import { useCallback } from "react"
-import { MaxNoteNumber } from "../Constants"
+import { MaxNoteNumber } from "../config"
 import { Range } from "../entities/geometry/Range"
 import { Selection } from "../entities/selection/Selection"
 import { NotePoint } from "../entities/transform/NotePoint"
@@ -8,16 +8,19 @@ import { isNotUndefined } from "../helpers/array"
 import { DraggableArea, PianoRollDraggable } from "../stores/PianoRollStore"
 import { isNoteEvent } from "../track"
 import { usePianoRoll } from "./usePianoRoll"
+import { useTrack } from "./useTrack"
 
 export function usePianoRollDraggable() {
-  const { getSelection, getSelectedTrack, getSelectedNoteIds, setSelection } =
-    usePianoRoll()
+  const { getSelection, getSelectedTrack, getSelectedNoteIds, setSelection, selectedTrackId } =
+    usePianoRoll() //TODO: do not mutate mobx state directly! Use hooks instead (e.g. useTrack hook). We will use hooks as a controller here. To pass events to the main application.
+  
+    const { updateEvent } = useTrack(selectedTrackId);
 
   return {
     getDraggablePosition: useCallback(
       (draggable: PianoRollDraggable): NotePoint | null => {
         const selection = getSelection()
-        const selectedTrack = getSelectedTrack()
+        const selectedTrack = getSelectedTrack();
 
         switch (draggable.type) {
           case "note": {
@@ -75,14 +78,14 @@ export function usePianoRollDraggable() {
             }
             switch (draggable.position) {
               case "center": {
-                selectedTrack.updateEvent(note.id, position)
-                break
+                updateEvent(note.id, position);
+                break;
               }
               case "left": {
                 if (position.tick === undefined) {
                   return
                 }
-                selectedTrack.updateEvent(note.id, {
+                updateEvent(note.id, {
                   tick: position.tick,
                   duration: note.duration + note.tick - position.tick,
                 })
@@ -92,7 +95,7 @@ export function usePianoRollDraggable() {
                 if (position.tick === undefined) {
                   return
                 }
-                selectedTrack.updateEvent(note.id, {
+                updateEvent(note.id, {
                   duration: position.tick - note.tick,
                 })
                 break
@@ -139,7 +142,7 @@ export function usePianoRollDraggable() {
           }
         }
       },
-      [getSelection, getSelectedTrack, setSelection],
+      [getSelection, getSelectedTrack, setSelection, selectedTrackId],
     ),
     getDraggableArea: useCallback(
       (

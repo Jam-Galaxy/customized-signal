@@ -111,5 +111,9 @@ export const useSong = () => {
     updateEndOfSong: useCallback(() => {
       song.updateEndOfSong()
     }, [song]),
+
+    serialize: useCallback(() => {
+      return songStore.serialize();
+    }, [song]),
   }
 }

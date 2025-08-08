@@ -6,6 +6,7 @@ import { useSong } from "../hooks/useSong"
 import { useTrackMute } from "../hooks/useTrackMute"
 import { downloadSongAsMidi } from "../midi/midiConversion"
 import Song, { emptySong } from "../song"
+import { useEventEmitter } from "../studioConnector/useEventEmitter"
 import { emptyTrack, TrackId, UNASSIGNED_TRACK_ID } from "../track"
 import { songFromFile } from "./file"
 
@@ -19,7 +20,8 @@ const openSongFile = async (input: HTMLInputElement): Promise<Song | null> => {
 }
 
 export const useSetSong = () => {
-  const { setSong } = useSong()
+  const connectorEventEmitter = useEventEmitter();
+  const { setSong, serialize } = useSong()
   const { clear: clearHistory } = useHistory()
   const { reset: resetTrackMute } = useTrackMute()
   const { stop, reset, setPosition } = usePlayer()
@@ -59,6 +61,9 @@ export const useSetSong = () => {
     stop()
     reset()
     setPosition(0)
+    // console.log("setSong: finished song=", newSong);
+    const serializedSong = serialize();
+    connectorEventEmitter['emit']("signal-song-setSong-finished", {song: serializedSong});
   }
 }
 

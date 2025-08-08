@@ -20,6 +20,8 @@ type Events = {
   "signal-track-createOrUpdate-finished": [{event: any}];
   "signal-track-updateEvent-finished": [{event: any}];
   "signal-track-updateEvents-finished": [{events: any}];
+
+  "signal-song-setSong-finished": [{song: any}];
 }
 export type ConnectorEventEmitter = WaveSurferEventEmitter<Events>;
 // const eventEmitter: EventEmitter<Events> = new EventEmitter();

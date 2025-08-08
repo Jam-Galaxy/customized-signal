@@ -1,16 +1,16 @@
 {
   "name": "@jam-galaxy/customized-signal",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
   "description": "A friendly music sequencer application for OS X and Windows.",
   "scripts": {
-    "start": "npm run start --prefix app/example",
-    "build": "npm run build:app && npm run build:static && npm run build:create-dist",
+    "start": "npm run start --prefix app/localLauncher",
     "build:app": "turbo build && cpx \"app/dist/**/*\" build",
     "build:static": "npm install --prefix static && npm run build --prefix static && cpx \"static/out/**/*\" build",
     "build:create-dist": "cpx \"build/**/*\" \"dist/build\" && node \"scripts/create-dist.mjs\"",
+    "build": "npm run build:app && npm run build:static && npm run build:create-dist",
     "clear": "rimraf dist && rimraf app/dist",
     "test": "turbo test",
     "firebase": "npm --prefix functions run build && firebase emulators:start",
@@ -41,7 +41,12 @@
     "packages/*"
   ],
   "packageManager": "npm@11.3.0",
+  "main": "./build/customized-signal/lib.js",
+	"types": "./build/customized-signal/app/src/lib.d.ts",
   "exports": {
-    ".": "./build/customized-signal/lib.js"
+    "import": {
+      "types": "./build/customized-signal/app/src/lib.d.ts",
+      "default": "./build/customized-signal/lib.js"
+    }
   }
 }

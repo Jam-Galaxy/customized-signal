@@ -17,24 +17,27 @@ function subscribeToEventsFromSignal() {
   eventEmitter.on("signal-track-addEvents-finished", ({events}) => {
     console.log("eventEmitter on signal-track-addEvents-finished: events=", events);
   })
-    eventEmitter.on("signal-track-removeEvent-finished", ({event}) => {
+  eventEmitter.on("signal-track-removeEvent-finished", ({event}) => {
     console.log("eventEmitter on signal-track-removeEvent-finished: event=", event);
   })
-    eventEmitter.on("signal-track-removeEvents-finished", ({events}) => {
+  eventEmitter.on("signal-track-removeEvents-finished", ({events}) => {
     console.log("eventEmitter on signal-track-removeEvents-finished: events=", events);
   })
-    eventEmitter.on("signal-track-removeRedundantEvents-finished", ({events}) => {
+  eventEmitter.on("signal-track-removeRedundantEvents-finished", ({events}) => {
     console.log("eventEmitter on signal-track-removeRedundantEvents-finished: events=", events);
   })
-    eventEmitter.on("signal-track-createOrUpdate-finished", ({event}) => {
+  eventEmitter.on("signal-track-createOrUpdate-finished", ({event}) => {
     console.log("eventEmitter on signal-track-createOrUpdate-finished: event=", event);
   })
-    eventEmitter.on("signal-track-updateEvent-finished", ({event}) => {
+  eventEmitter.on("signal-track-updateEvent-finished", ({event}) => {
     console.log("eventEmitter on signal-track-updateEvent-finished: event=", event);
   })
-    eventEmitter.on("signal-track-updateEvents-finished", ({events}) => {
+  eventEmitter.on("signal-track-updateEvents-finished", ({events}) => {
     console.log("eventEmitter on signal-track-updateEvents-finished: events=", events);
-  })
+  });
+  eventEmitter.on("signal-song-setSong-finished", ({song}) => {
+    console.log("eventEmitter on signal-song-setSong-finished: song=", song);
+  });
 }
 subscribeToEventsFromSignal();
 

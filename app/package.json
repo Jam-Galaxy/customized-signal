@@ -3,7 +3,9 @@
   "description": "A friendly music sequencer application for OS X and Windows.",
   "scripts": {
     "dev": "webpack serve --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "build:generate-type-declarations": "tsc --project tsconfig.production.json",
+    "build:webpack": "webpack --config webpack.prod.js",
+    "build": "npm run build:webpack && npm run build:generate-type-declarations",
     "dev:electron": "webpack serve --config webpack.electron.dev.js",
     "build:electron": "webpack --config webpack.electron.prod.js",
     "serve": "npx http-server dist",

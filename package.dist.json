@@ -4,7 +4,12 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "description": "A friendly music sequencer application for OS X and Windows.",
+  "main": "./build/customized-signal/lib.js",
+	"types": "./build/customized-signal/app/src/lib.d.ts",
   "exports": {
-    ".": "./build/customized-signal/lib.js"
+    "import": {
+      "types": "./build/customized-signal/app/src/lib.d.ts",
+      "default": "./build/customized-signal/lib.js"
+    }
   }
 }

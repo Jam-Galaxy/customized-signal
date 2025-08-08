@@ -1,7 +1,7 @@
 import { Player } from "@signal-app/player"
 import { cloneDeep } from "lodash"
 import { computed, makeObservable, observable } from "mobx"
-import { MaxNoteNumber } from "../Constants"
+import { MaxNoteNumber } from "../config"
 import { Range } from "../entities/geometry/Range"
 import { Rect } from "../entities/geometry/Rect"
 import { ArrangeSelection } from "../entities/selection/ArrangeSelection"

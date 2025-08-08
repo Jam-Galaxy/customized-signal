@@ -1,7 +1,7 @@
 import { clamp } from "lodash"
 import { computed, makeObservable, observable } from "mobx"
 import { BAR_WIDTH } from "../components/inputs/ScrollBar"
-import { Layout } from "../Constants"
+import { Layout } from "../config"
 import { TrackTransform } from "../entities/transform/TrackTransform"
 import { SongStore } from "./SongStore"
 
