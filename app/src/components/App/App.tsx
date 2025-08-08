@@ -36,8 +36,9 @@ import { LocalizationProvider } from "./LocalizationProvider"
 import { StudioConnector } from "../../studioConnector/StudioConnector"
 import { EventEmitterProvider } from "../../studioConnector/useEventEmitter"
 import { EventEmitter } from "../../studioConnector/EventEmitter"
+import { AnyAudioContext } from "../../audiomodel/types"
 
-export function App({toneAudioContext, audioContext, eventEmitter}: {toneAudioContext: any, audioContext: AudioContext, eventEmitter: EventEmitter}) {
+export function App({toneAudioContext, audioContext, eventEmitter}: {toneAudioContext: any, audioContext: AnyAudioContext, eventEmitter: EventEmitter}) {
   console.log(eventEmitter);
   const rootStore = new RootStore(toneAudioContext, audioContext)
   return (

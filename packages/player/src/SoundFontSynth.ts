@@ -5,6 +5,7 @@ import { SendableEvent, SynthOutput } from "./SynthOutput.js";
 //@ts-ignore
 import audioWorkletProcessor from "@ryohey/wavelet/dist/processor.js";
 import { createWorkletNode } from "./utils/utils.js";
+import { AnyAudioContext } from "./types.js";
 
 export class SoundFontSynth implements SynthOutput {
   private synth: AudioWorkletNode | null = null
@@ -20,7 +21,7 @@ export class SoundFontSynth implements SynthOutput {
 
   private sequenceNumber = 0
 
-  constructor(private readonly context: AudioContext, private readonly toneAudioContext: any) {}
+  constructor(private readonly context: AnyAudioContext, private readonly toneAudioContext: any) {}
 
   async setup() {
     // await this.context.audioWorklet.addModule(audioWorkletProcessor);

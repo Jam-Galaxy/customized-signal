@@ -1,5 +1,1 @@
-export type DistributiveOmit<T, K extends keyof any> = T extends any
-  ? Omit<T, K>
-  : never
-
 export type AnyAudioContext = AudioContext | OfflineAudioContext //INFO: type from Tone.js lib. Use type from Tone.js if Tone.js will used in this project

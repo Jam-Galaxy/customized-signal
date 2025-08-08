@@ -12,6 +12,7 @@ import { SerializedPianoRollStore } from "./PianoRollStore"
 import { registerReactions } from "./reactions"
 import { SongStore } from "./SongStore"
 import { SoundFontStore } from "./SoundFontStore"
+import { AnyAudioContext } from "../audiomodel/types"
 
 // we use any for now. related: https://github.com/Microsoft/TypeScript/issues/1897
 type Json = any
@@ -35,7 +36,7 @@ export default class RootStore {
   readonly midiMonitor: MIDIMonitor
   readonly soundFontStore: SoundFontStore
 
-  constructor(toneAudioContext?: any, audioContext?: AudioContext) {
+  constructor(toneAudioContext?: any, audioContext?: AnyAudioContext) {
     if(!audioContext) {
       console.warn("audioContext was not passed! Creating new AudioContext instance");
       audioContext = new (window.AudioContext || window.webkitAudioContext)() 
