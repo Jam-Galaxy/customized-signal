@@ -1,5 +1,5 @@
 import { clamp } from "lodash"
-import { MaxNoteNumber } from "../../config"
+import { MaxNoteNumber } from "../../configuration"
 import { Rect } from "../geometry/Rect"
 import { NoteCoordTransform } from "../transform/NoteCoordTransform"
 import { NotePoint } from "../transform/NotePoint"

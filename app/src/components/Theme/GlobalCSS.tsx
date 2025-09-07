@@ -1,5 +1,5 @@
 import { css, Global, useTheme } from "@emotion/react"
-import { Layout } from "../../config"
+import { Layout } from "../../configuration"
 
 export const GlobalCSS = () => {
   const theme = useTheme()

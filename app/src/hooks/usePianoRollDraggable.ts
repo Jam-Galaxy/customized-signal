@@ -1,6 +1,6 @@
 import { max, min } from "lodash"
 import { useCallback } from "react"
-import { MaxNoteNumber } from "../config"
+import { MaxNoteNumber } from "../configuration"
 import { Range } from "../entities/geometry/Range"
 import { Selection } from "../entities/selection/Selection"
 import { NotePoint } from "../entities/transform/NotePoint"

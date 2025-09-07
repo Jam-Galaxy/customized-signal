@@ -1,6 +1,6 @@
 import { Player } from "@signal-app/player"
 import { autorun, computed, makeObservable, observable } from "mobx"
-import { Layout } from "../config"
+import { Layout } from "../configuration"
 import { TickTransform } from "../entities/transform/TickTransform"
 import { SongStore } from "./SongStore"
 

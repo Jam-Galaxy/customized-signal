@@ -1,4 +1,4 @@
-import { MaxNoteNumber } from "../../config"
+import { MaxNoteNumber } from "../../configuration"
 
 export type NoteNumber = number
 

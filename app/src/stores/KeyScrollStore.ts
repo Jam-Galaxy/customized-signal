@@ -1,5 +1,5 @@
 import { computed, makeObservable, observable } from "mobx"
-import { Layout } from "../config"
+import { Layout } from "../configuration"
 import { KeyTransform } from "../entities/transform/KeyTransform"
 
 export class KeyScrollStore {

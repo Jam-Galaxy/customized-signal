@@ -2,8 +2,13 @@ import { useEffect } from "react"
 import { isRunningInElectron } from "../../helpers/platform"
 import { useSong } from "../../hooks/useSong"
 import { useLocalization } from "../../localize/useLocalization"
+import { configuration } from "../../configuration"
 
 export const OnBeforeUnload = () => {
+  if(!configuration.showBeforeUnloadConfirmationDialog) {
+    return;
+  }
+
   const { getSong } = useSong()
   const localized = useLocalization()
 
@@ -31,7 +36,8 @@ export const OnBeforeUnload = () => {
         }
       }
     }
-    window.addEventListener("beforeunload", listener)
+
+    window.addEventListener("beforeunload", (e) => {e.returnValue = "123"})
 
     return () => {
       window.removeEventListener("beforeunload", listener)

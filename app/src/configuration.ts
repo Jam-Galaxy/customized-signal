@@ -9,3 +9,11 @@ export const Layout = {
 export const MaxNoteNumber = 127
 
 export const WHEEL_SCROLL_RATE = 1 / 120
+
+type Configuration = {
+  showBeforeUnloadConfirmationDialog: boolean;
+}
+export const configuration: Configuration = {
+  showBeforeUnloadConfirmationDialog: false,
+}
+// export const 

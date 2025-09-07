@@ -1,7 +1,7 @@
 import { useTheme } from "@emotion/react"
 import styled from "@emotion/styled"
 import { FC } from "react"
-import { Layout } from "../../config"
+import { Layout } from "../../configuration"
 import { useKeyScroll } from "../../hooks/useKeyScroll"
 import CanvasPianoRuler from "./CanvasPianoRuler"
 import { PianoKeys } from "./PianoKeys"
