@@ -1,3 +1,5 @@
+> **Status: archived.** A modified build of the [signal](https://github.com/ryohey/signal) MIDI editor by ryohey, adapted for the Jam Galaxy browser studio. The Jam Galaxy changes were made in 2025; the commit history before that is upstream signal's, preserved intact. Jam Galaxy is no longer active and this fork is not maintained. It is published as-is so the work is readable and reusable.
+
 This is modified version of [signal](https://signal.vercel.app).
 
 Some differencies:
